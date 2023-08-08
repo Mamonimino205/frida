@@ -1,0 +1,8 @@
+\.DS_Store
+^XmlEdit.app
+^.qmake.stash
+^qrc_application.cpp
+moc_*
+^Makefile
+.+\.o
+^icons/XmlEdit.iconset

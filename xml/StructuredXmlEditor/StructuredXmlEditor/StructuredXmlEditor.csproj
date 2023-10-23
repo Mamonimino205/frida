@@ -1,0 +1,104 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <OutputType>WinExe</OutputType>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <UseWindowsForms>true</UseWindowsForms>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>x64</PlatformTarget>
+    <LangVersion>default</LangVersion>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>Icon.ico</ApplicationIcon>
+    <StartupObject>StructuredXmlEditor.App</StartupObject>
+  </PropertyGroup>
+  <ItemGroup>
+    <None Remove="Resources\Sync.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Core.xmldef">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <AppDesigner Include="Properties\" />
+    <EmbeddedResource Include="Resources\DataTransformerSyntax.xshd" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icon.ico" />
+    <Resource Include="Resources\Add.png" />
+    <Resource Include="Resources\Icon.png" />
+    <Resource Include="Resources\New.png" />
+    <Resource Include="Resources\Open.png" />
+    <Resource Include="Resources\Redo.png" />
+    <Resource Include="Resources\Remove.png" />
+    <Resource Include="Resources\Save.png" />
+    <Resource Include="Resources\SaveAs.png" />
+    <Resource Include="Resources\Settings.png" />
+    <Resource Include="Resources\Shuffle.png" />
+    <Resource Include="Resources\Sync.png" />
+    <Resource Include="Resources\Undo.png" />
+    <Resource Include="Resources\Warning.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="FodyWeavers.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\AvalonDock\DockBottom.PNG" />
+    <Resource Include="Resources\AvalonDock\DockLeft.PNG" />
+    <Resource Include="Resources\AvalonDock\DockPaneEmpty.png" />
+    <Resource Include="Resources\AvalonDock\DockRight.PNG" />
+    <Resource Include="Resources\AvalonDock\DockTop.PNG" />
+    <Resource Include="Resources\AvalonDock\InnerDockDocPaneBottom.png" />
+    <Resource Include="Resources\AvalonDock\InnerDockDocPaneLeft.png" />
+    <Resource Include="Resources\AvalonDock\InnerDockDocPaneRight.png" />
+    <Resource Include="Resources\AvalonDock\InnerDockDocPaneTop.png" />
+    <Resource Include="Resources\AvalonDock\InnerDockPaneBottom.png" />
+    <Resource Include="Resources\AvalonDock\InnerDockPaneInside.png" />
+    <Resource Include="Resources\AvalonDock\InnerDockPaneLeft.png" />
+    <Resource Include="Resources\AvalonDock\InnerDockPaneRight.png" />
+    <Resource Include="Resources\AvalonDock\InnerDockPaneTop.png" />
+    <Resource Include="Resources\AvalonDock\PinAutoHide.png" />
+    <Resource Include="Resources\AvalonDock\PinClose.png" />
+    <Resource Include="Resources\AvalonDock\PinDocMenu.png" />
+    <Resource Include="Resources\AvalonDock\PinMaximize.png" />
+    <Resource Include="Resources\AvalonDock\PinMenu.png" />
+    <Resource Include="Resources\AvalonDock\PinRestore.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Edit.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Changelog.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Draw.png" />
+    <Resource Include="Resources\Eyedropper.png" />
+    <Resource Include="Resources\MagicWand.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Shape.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\File.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\DefIcon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Branch.png" />
+    <Resource Include="Resources\DownArrow.png" />
+    <Resource Include="Resources\Pull.png" />
+    <Resource Include="Resources\Push.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="AvalonEdit" Version="6.0.1" />
+    <PackageReference Include="DiffPlex" Version="1.6.1" />
+    <PackageReference Include="Dirkster.AvalonDock" Version="4.10.0" />
+    <PackageReference Include="NCalc.NetCore" Version="1.0.1" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+    <PackageReference Include="YamlDotNet" Version="8.1.1" />
+	<PackageReference Include="Microsoft.Windows.Compatibility" Version="3.1.0" />
+  </ItemGroup>
+</Project>

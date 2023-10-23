@@ -1,0 +1,9 @@
+.vs
+packages
+**/bin
+**/obj
+*.user
+*.old
+*.vspx
+*.exe
+*.pdb

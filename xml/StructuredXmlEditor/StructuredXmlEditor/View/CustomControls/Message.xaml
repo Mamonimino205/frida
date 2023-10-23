@@ -1,0 +1,63 @@
+﻿<Window
+	x:Class="StructuredXmlEditor.View.Message"
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	xmlns:local="clr-namespace:StructuredXmlEditor.View"
+	Icon="pack://application:,,,/StructuredXmlEditor;component/Resources/Icon.png"
+	WindowStartupLocation="CenterScreen"
+	Width="400"
+	SizeToContent="Height"
+	ResizeMode="NoResize">
+	<Grid>
+		<Grid.RowDefinitions>
+			<RowDefinition
+				Height="*" />
+			<RowDefinition
+				Height="Auto" />
+			<RowDefinition
+				Height="Auto" />
+		</Grid.RowDefinitions>
+
+		<TextBox
+			Foreground="{StaticResource FontBrush}"
+			Background="Transparent"
+			BorderThickness="0"
+			Text="{Binding MessageString, Mode=OneWay}"
+			IsReadOnly="True"
+			Margin="10"
+			TextWrapping="Wrap" />
+
+		<Border
+			Grid.Row="1"
+			Margin="10"
+			BorderThickness="1"
+			BorderBrush="{StaticResource BorderNormalBrush}"
+			Height="1"
+			HorizontalAlignment="Stretch" />
+
+		<ItemsControl
+			HorizontalAlignment="Right"
+			Margin="10"
+			Grid.Row="2"
+			ItemsSource="{Binding Buttons}">
+			<ItemsControl.ItemsPanel>
+				<ItemsPanelTemplate>
+					<StackPanel
+						Orientation="Horizontal" />
+				</ItemsPanelTemplate>
+			</ItemsControl.ItemsPanel>
+			<ItemsControl.ItemTemplate>
+				<DataTemplate>
+					<Button
+						Width="75"
+						Content="{Binding}"
+						Click="Button_Click"
+						Padding="2"
+						Margin="5" />
+				</DataTemplate>
+			</ItemsControl.ItemTemplate>
+		</ItemsControl>
+	</Grid>
+</Window>

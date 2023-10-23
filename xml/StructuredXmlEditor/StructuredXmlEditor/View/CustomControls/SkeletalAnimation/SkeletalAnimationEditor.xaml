@@ -1,0 +1,101 @@
+﻿<UserControl
+	x:Class="StructuredXmlEditor.View.SkeletalAnimationEditor"
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	xmlns:local="clr-namespace:StructuredXmlEditor.View">
+	<Grid>
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition
+				Width="Auto" />
+			<ColumnDefinition
+				Width="*" />
+			<ColumnDefinition
+				Width="Auto" />
+		</Grid.ColumnDefinitions>
+
+		<Grid.RowDefinitions>
+			<RowDefinition
+				Height="*" />
+			<RowDefinition
+				Height="Auto" />
+		</Grid.RowDefinitions>
+		
+		<!-- Options sidebar -->
+		<Border
+			Background="{StaticResource BackgroundDarkBrush}"
+			BorderBrush="{StaticResource BorderDarkBrush}"
+			BorderThickness="1">
+			<DockPanel
+				Margin="2"
+				LastChildFill="False">
+				<ToggleButton
+					Margin="1"
+					Width="24"
+					DockPanel.Dock="Top"
+					ToolTip="Translation Mode"
+					Content="T"
+					IsChecked="{Binding EditorPanel.TranslateMode, RelativeSource={RelativeSource AncestorType={x:Type local:SkeletalAnimationEditor}}}" />
+				<ToggleButton
+					Margin="1"
+					Width="24"
+					DockPanel.Dock="Top"
+					ToolTip="Rotation Mode"
+					Content="R"
+					IsChecked="{Binding EditorPanel.RotationMode, RelativeSource={RelativeSource AncestorType={x:Type local:SkeletalAnimationEditor}}}" />
+				<ToggleButton
+					Margin="1,10,1,1"
+					Width="24"
+					DockPanel.Dock="Top"
+					ToolTip="Show Bone Names"
+					Content="BN"
+					IsChecked="{Binding EditorPanel.ShowBoneNames, RelativeSource={RelativeSource AncestorType={x:Type local:SkeletalAnimationEditor}}}" />
+				<ToggleButton
+					Margin="1"
+					Width="24"
+					DockPanel.Dock="Top"
+					ToolTip="Show Bone Images"
+					Content="BI"
+					IsChecked="{Binding EditorPanel.ShowBoneImages, RelativeSource={RelativeSource AncestorType={x:Type local:SkeletalAnimationEditor}}}" />
+				<ToggleButton
+					Margin="1"
+					Width="24"
+					DockPanel.Dock="Top"
+					ToolTip="Show Bone Connections"
+					Content="BC"
+					IsChecked="{Binding EditorPanel.ShowBoneConnections, RelativeSource={RelativeSource AncestorType={x:Type local:SkeletalAnimationEditor}}}" />
+				<ToggleButton
+					Margin="1"
+					Width="24"
+					DockPanel.Dock="Top"
+					ToolTip="Show Bone Nodes"
+					Content="No"
+					IsChecked="{Binding EditorPanel.ShowBoneNodes, RelativeSource={RelativeSource AncestorType={x:Type local:SkeletalAnimationEditor}}}" />
+			</DockPanel>
+		</Border>
+		
+		
+		<!-- Editor area -->
+		<ContentPresenter
+			Grid.Column="1"
+			Content="{Binding EditorPanel, RelativeSource={RelativeSource AncestorType={x:Type local:SkeletalAnimationEditor}}}" />
+
+		<!-- Overview panels -->
+		
+		
+		<!-- Timeline -->
+		<Border
+			Grid.Row="1"
+			Grid.ColumnSpan="3"
+			BorderBrush="{StaticResource BorderDarkBrush}"
+			BorderThickness="1">
+
+			<ContentPresenter
+				Height="50"
+				Content="{Binding RootItems[0].SelectedAnimation.Timeline}" />
+
+		</Border>
+
+	</Grid>
+</UserControl>

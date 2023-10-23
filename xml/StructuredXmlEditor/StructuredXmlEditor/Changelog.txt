@@ -1,0 +1,136 @@
+﻿--------- 1.10.0 ---------
+- Add basic support for localised strings. Marking a string element as NeedsLocalisation will write the string contents to a file, and reference it with a GUID in the original element.
+- Create a data transformer tool that allows mutating xml files through a template.
+- Allow Collections to load their contents from a Keys list or a DefKey, like References do.
+
+- Fix multiple prompts to reload file when it changes on disk.
+- Fix some graph node jumping bugs.
+
+--------- 1.9.0 ---------
+
+- StructElements now load comments from the definition file and use them in the created item.
+- Added a flags dara type. This is a comma seperated list of strings, editted with a multiselect editor.
+- You can now drag between timelines in a group. 
+- You can now marquee select across a timeline group.
+- Allow loading of references that have only a single valid type (useful for switching from struct -> reference).
+- Make graph nodes snap to a grid. This should make it easier to make nicer looking graphs.
+- Documents now only prompt to reload when focused, and only prompt a single time.
+- Graphs are now positioned with their root node at the origin on save.
+
+- Fix a number of cases of keyboard focus being lost on editing.
+- Fix a crash on shutdown.
+- Fix a bug when deleting timeline keyframes.
+- Fix a crash in the timeline.
+- Fix a crash when updating the description of reference items.
+- Fix a bug that was preventing visibleif bindings being updated on change.
+
+
+--------- 1.8.0 ---------
+
+- Use the comments in the definition for a timelines keyframes to group them in the dropdown.
+- Allow referencedefs to be global.
+- Added an 'add multiple' option to timlines that have only a file as the keyframe data.
+
+- Added support for referencing resource types in files. When you pick a file with this on it will check the resource type of the file you choose to make sure it matches. It also provides a create button to make one of those file types.
+- Added a 'relativetothis' option to files that will store the path to the file relative to the currently open file, instead of relative to the project root.
+
+- Added support for resource type specific colours and icons. You can configure this at the root element in a definition.
+
+- Added support for comments in the graph. You can now rightclick on a graph node and set the comment. Click on the coment title to edit the name/colour. Comments can be expanded/collapsed too.
+- Added support for graph copy/paste. Currently only available via rightclick.
+- Added support for control points in the graph. Right click on a link and select 'add control point'. You can then drag this around to change the link. Right click on it to flip the sides the link connects to.
+
+- Added support for showing animated previews of image sequences, assuming the image is of the form '{path}_1.png, {path}_2.png' etc.
+
+- Added a template creator tool. This allows creating a collection of files from a template. Templates are just a zipped collection of files placed in the 'Templates' folder. The tool looks through the zip and finds all strings surrounded by {}, then shows an editor so the user can give them new content.
+
+- Fix undoredo to happen instantly, instead of 500ms after the change was made.
+
+- Fix many bugs in the graph, including nodes suddenly jumping around, nodes becoming detached and moving with the scroll, and others.
+
+- Lots and lots of optimisations to graphs, asciigrid and large data types.
+
+
+--------- 1.7.0 ---------
+
+- Mode for collections that only allow a single instance of each of their children.
+- Max length parameter on strings.
+- Many optimisations.
+- Improvements to the theme.
+
+
+--------- 1.6.0 ---------
+
+- Improve timelines.
+ -- Keyframes can now have a duration.
+ -- Timelines sequentially next to each other will share a scroll position and zoom amount.
+ -- Keyframes can snap to the start/end of keyframes on other timelines in the group.
+- Number items will now parse equations typed into them. (e.g. typing 3*4 will put 12 into the data).
+- Add support for 'comment' elements. This should help with organising your data.
+- Add a 'ReferenceDef' element that allows you to specify the Keys in a seperate element, then import those.
+
+
+--------- 1.5.0 ---------
+
+- Add support for multiediting. Either select some documents in the project view then right click -> Multiedit (this will open it as a new document), or right click on a collection and click multi edit children (this will show it in the Focus tool).
+- Add support for Yaml as a data type.
+- Add support for structs to 'Extend' from another struct, copying its contents and optionally overwriting any elements (do this by assigning an element the same name as that in the parent).
+
+
+--------- 1.4.0 ---------
+
+- Added a new AsciiGrid for editing ascii grids. This is a focus editor for the MultilineString element type.
+
+
+--------- 1.3.0 ---------
+
+- Add support for giving data files a custom extension, and choosing whether the data should be xml or json.
+- Add a ProjectView tool that allows browsing the data files in the project.
+- Add support for adding attributes to the xmldef. This is found by checking the 'HasAttributes' attribute on an element.
+- Add grouping of entries in the reference dropdown. e.g. Apples,Oranges,Carrots,Cucumber -> Fruit(Apples,Oranges),Vegetables(Carrots,Cucumber).
+- Allow for far more complex visibleif bindings. They can now bind to the values of attributes, and also use a path from the current node. e.g. Apples.Name or Parent.Size.
+- Collections can now have multiple allowed child types. The one to be spawned can be chosen via the dropdown by the add button.
+- Files now display a preview of any linked images. Additionally in the timeline if a keyframe contains a fileimage then it will display a preview of that too.
+
+
+--------- 1.2.0 ---------
+
+- Fix deleting of the Update executable.
+- Make all graph links look like reference ones if FlattenData is used. Also remove the LinkType edit box.
+- Slightly alter the padding of the graphnodes to waste less space.
+- Add a proper error reporting and feedback system, that sends the data via email.
+
+
+--------- 1.0.0 ---------
+
+- First major release.
+- Add support for loading and saving json.
+- Adds support for GraphNodes, and Graph based editing.
+- Added ability to generate a rough definition for a xml or json file. This show speed up the creation of definitions for existing data.
+- Added a 'Swap' option to references. This attempts to swap the current data with another definition. This should make creating definitions far less painful.
+
+- Adds dockable miscellaneous tools:
+ -- Add UndoHistory tool that allows viewing and browsing the Undo history.
+ -- Add StartPage that shows a fair amount of useful data.
+ -- Add FocusTool that allows for easily seeing the data for the selected node in the Graph view.
+
+- Optimised a lot.
+- Removed the ability to change the element name dynamically (via ChildAsName or ValueAsName).
+- Added support for updating the tool semi-automatically.
+
+
+--------- 0.2.1 ---------
+
+- Contains improvements to visibleif (add support for the || operator).
+
+
+--------- 0.2.0 ---------
+
+- Adds timeline element type.
+
+
+--------- 0.1.0 ---------
+
+- First release of the tool
+- General editors for all the major types.
+- Ability to create a definition from within the tool.

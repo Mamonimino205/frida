@@ -1,0 +1,465 @@
+﻿<Definitions Extension="xmldef">
+
+	<ReferenceDef Name="Elements" Keys="Primitive(Boolean,Colour,Enum,File,Flags,Number,String,Vector),Complex(Collection,GraphReference,MultilineString,Reference,Struct,Timeline,Tree),Comment(Comment)" />
+	
+	<CollectionDef Name="Attributes" ToolTip="A the attributes of this element." TextColour="Struct" SkipIfDefault="true">
+		<Reference Name="Attribute" Keys="Boolean,Colour,Enum,File,Flags,Number,String" ToolTip="The attribute" />
+	</CollectionDef>
+
+	<StructDef Name="SkeletalAnimation" ToolTip="A skeletal animation." TextColour="Struct">
+		<Attributes>
+			<String Name="Name" Default="Animation" ToolTip="The name to be written for this element. Place a path to an element inside a '{}' to use that elements value." />
+			<String Name="VisibleIf" ToolTip="The expression to use to determine whether this element is visible. Leave blank to have always visible." />
+			<Colour Name="TextColour" ToolTip="The colour on the element name in the ui." Default="Primitive" HasAlpha="false" />
+			<String Name="ToolTip" ToolTip="The tooltip to display when this element is moused over." />
+			<Boolean Name="HasAttributes" ToolTip="Enable to allow adding attributes" VisibleIf="Root.DataType==xml" />
+		</Attributes>
+		<Reference Name="Attributes" Keys="Attributes" ToolTip="The attributes of this element" Nullable="true" VisibleIf="HasAttributes==true" />
+	</StructDef>
+	
+	<StructDef Name="Number" ToolTip="A number." TextColour="Primitive">
+		<Attributes>
+			<String Name="Name" Default="Number" ToolTip="The name to be written for this element. Place a path to an element inside a '{}' to use that elements value." />
+			<Enum Name="Type" EnumValues="Float,Int" ToolTip="The value type." />
+			<Number Name="Min" Default="-9999999" ToolTip="The minimum value this element can contain." />
+			<Number Name="Max" Default="9999999" ToolTip="The maximum value this element can contain." />
+			<Number Name="Default" ToolTip="The default value for this element." />
+			<Boolean Name="SkipIfDefault" ToolTip="Don't write out this element if it is at the default value." Default="true" />
+			<String Name="VisibleIf" ToolTip="The expression to use to determine whether this element is visible. Leave blank to have always visible." />
+			<Colour Name="TextColour" ToolTip="The colour on the element name in the ui." Default="Primitive" HasAlpha="false" />
+			<String Name="ToolTip" ToolTip="The tooltip to display when this element is moused over." />
+			<Boolean Name="HasAttributes" ToolTip="Enable to allow adding attributes" VisibleIf="Root.DataType==xml" />
+		</Attributes>
+		<Reference Name="Attributes" Keys="Attributes" ToolTip="The attributes of this element" Nullable="true" VisibleIf="HasAttributes==true" />
+	</StructDef>
+
+	<StructDef Name="Vector" ToolTip="A vector." TextColour="Primitive">
+		<Attributes>
+			<String Name="Name" Default="Vector" ToolTip="The name to be written for this element. Place a path to an element inside a '{}' to use that elements value." />
+			<Enum Name="NumComponents" Default="2" EnumValues="2,3,4" ToolTip="The number of components this vector contains." />
+			<String Name="Name1" Default="X" ToolTip="The name to display for component 1." />
+			<String Name="Name2" Default="Y" ToolTip="The name to display for component 2." />
+			<String Name="Name3" Default="Z" ToolTip="The name to display for component 3." VisibleIf="NumComponents==3 || NumComponents==4" />
+			<String Name="Name4" Default="W" ToolTip="The name to display for component 4." VisibleIf="NumComponents==4" />
+			<Number Name="Min" Default="-9999999" ToolTip="The minimum value this element can contain." />
+			<Number Name="Max" Default="9999999" ToolTip="The maximum value this element can contain." />
+			<String Name="Default" Default="0,0,0,0" ToolTip="The comma seperated default values" />
+			<Enum Name="Type" Default="Float" EnumValues="Float,Int" ToolTip="The value type." />
+			<Boolean Name="SkipIfDefault" ToolTip="Don't write out this element if it is at the default value." Default="true" />
+			<String Name="VisibleIf" ToolTip="The expression to use to determine whether this element is visible. Leave blank to have always visible." />
+			<Colour Name="TextColour" ToolTip="The colour on the element name in the ui." Default="Primitive" HasAlpha="false" />
+			<String Name="ToolTip" ToolTip="The tooltip to display when this element is moused over." />
+			<Boolean Name="HasAttributes" ToolTip="Enable to allow adding attributes" VisibleIf="Root.DataType==xml" />
+		</Attributes>
+		<Reference Name="Attributes" Keys="Attributes" ToolTip="The attributes of this element" Nullable="true" VisibleIf="HasAttributes==true" />
+	</StructDef>
+
+	<StructDef Name="String" ToolTip="A string." TextColour="Primitive" >
+		<Attributes>
+			<String Name="Name" Default="String" ToolTip="The name to be written for this element. Place a path to an element inside a '{}' to use that elements value." />
+			<Number Name="MaxLength" Default="9999999" Type="Int" Min="1" ToolTip="The max number of characters in this element" />
+			<String Name="Default" ToolTip="The default value for this element." />
+			<Boolean Name="NeedsLocalisation" ToolTip="Whether the text should be written to a seperate localisation file" Default="false" />
+			<String Name="LocalisationFile" ToolTip="The name of the localisation file to store the localisation in" VisibleIf="NeedsLocalisation==true" />
+			<Boolean Name="SkipIfDefault" ToolTip="Don't write out this element if it is at the default value." Default="true" />
+			<String Name="VisibleIf" ToolTip="The expression to use to determine whether this element is visible. Leave blank to have always visible." />
+			<Colour Name="TextColour" ToolTip="The colour on the element name in the ui." Default="Primitive" HasAlpha="false" />
+			<String Name="ToolTip" ToolTip="The tooltip to display when this element is moused over." />
+			<Boolean Name="HasAttributes" ToolTip="Enable to allow adding attributes" VisibleIf="Root.DataType==xml" />
+		</Attributes>
+		<Reference Name="Attributes" Keys="Attributes" ToolTip="The attributes of this element" Nullable="true" VisibleIf="HasAttributes==true" />
+	</StructDef>
+
+	<StructDef Name="File" ToolTip="A file path (relative to the project root)." TextColour="Primitive" >
+		<Attributes>
+			<String Name="Name" Default="File" ToolTip="The name to be written for this element. Place a path to an element inside a '{}' to use that elements value." />
+			<String Name="BasePath" ToolTip="The base path (relative to the project root) to convert any selected paths to." />
+			<Boolean Name="StripExtension" ToolTip="Whether to strip the extension from the chosen path" />
+			<String Name="ResourceType" ToolTip="The xml resource type allowed by this." VisibleIf="AllowedFileTypes==null" />
+			<Boolean Name="RelativeToThis" ToolTip="Whether the chosen file should be relative to this file. If false it will be relative to the project root." />
+			<String Name="AllowedFileTypes" ToolTip="A comma seperated list of allowed extensions." VisibleIf="ResourceType==null" />
+			<String Name="Default" ToolTip="The default value for this element." />
+			<Boolean Name="SkipIfDefault" ToolTip="Don't write out this element if it is at the default value." Default="true" />
+			<String Name="VisibleIf" ToolTip="The expression to use to determine whether this element is visible. Leave blank to have always visible." />
+			<Colour Name="TextColour" ToolTip="The colour on the element name in the ui." Default="Primitive" HasAlpha="false" />
+			<String Name="ToolTip" ToolTip="The tooltip to display when this element is moused over." />
+			<Boolean Name="HasAttributes" ToolTip="Enable to allow adding attributes" VisibleIf="Root.DataType==xml" />
+		</Attributes>
+		<Reference Name="Attributes" Keys="Attributes" ToolTip="The attributes of this element" Nullable="true" VisibleIf="HasAttributes==true" />
+	</StructDef>
+
+	<StructDef Name="Boolean" ToolTip="A boolean (true/false)." TextColour="Primitive">
+		<Attributes>
+			<String Name="Name" Default="Boolean" ToolTip="The name to be written for this element. Place a path to an element inside a '{}' to use that elements value." />
+			<Boolean Name="Default" ToolTip="The default value for this element." />
+			<Boolean Name="SkipIfDefault" ToolTip="Don't write out this element if it is at the default value." Default="true" />
+			<String Name="VisibleIf" ToolTip="The expression to use to determine whether this element is visible. Leave blank to have always visible." />
+			<Colour Name="TextColour" ToolTip="The colour on the element name in the ui." Default="Primitive" HasAlpha="false" />
+			<String Name="ToolTip" ToolTip="The tooltip to display when this element is moused over." />
+			<Boolean Name="HasAttributes" ToolTip="Enable to allow adding attributes" VisibleIf="Root.DataType==xml" />
+		</Attributes>
+		<Reference Name="Attributes" Keys="Attributes" ToolTip="The attributes of this element" Nullable="true" VisibleIf="HasAttributes==true" />
+	</StructDef>
+
+	<StructDef Name="Colour" ToolTip="A colour (stored as RGB or RGBA in 0-255 range)." TextColour="Primitive">
+		<Attributes>
+			<String Name="Name" Default="Colour" ToolTip="The name to be written for this element. Place a path to an element inside a '{}' to use that elements value." />
+			<Boolean Name="HasAlpha" Default="true" ToolTip="Whether this colour has an alpha value that isnt 255. If set to false then the colour will only write RGB, instead of RGBA." />
+			<Colour Name="Default" ToolTip="The default colour." />
+			<Boolean Name="SkipIfDefault" ToolTip="Don't write out this element if it is at the default value." Default="true" />
+			<String Name="VisibleIf" ToolTip="The expression to use to determine whether this element is visible. Leave blank to have always visible." />
+			<Colour Name="TextColour" ToolTip="The colour on the element name in the ui." Default="Primitive" HasAlpha="false" />
+			<String Name="ToolTip" ToolTip="The tooltip to display when this element is moused over." />
+			<Boolean Name="HasAttributes" ToolTip="Enable to allow adding attributes" VisibleIf="Root.DataType==xml" />
+		</Attributes>
+		<Reference Name="Attributes" Keys="Attributes" ToolTip="The attributes of this element" Nullable="true" VisibleIf="HasAttributes==true" />
+	</StructDef>
+
+	<StructDef Name="MultilineString" ToolTip="A string that spans multiple lines." TextColour="Primitive">
+		<Attributes>
+			<String Name="Name" Default="MultilineString" ToolTip="The name to be written for this element. Place a path to an element inside a '{}' to use that elements value." />
+			<String Name="Default" ToolTip="The default value for this element." />
+			<Boolean Name="SkipIfDefault" ToolTip="Don't write out this element if it is at the default value." Default="true" />
+			<Boolean Name="ElementPerLine" ToolTip="If true then the string will be split line by line into child elements." />
+			<String Name="LineElementName" ToolTip="The name of the element that holds each line of the string" Default="Line" VisibleIf="ElementPerLine==true" />
+			<Boolean Name="IsAsciiGrid" ToolTip="If true then the option to use the ascii grid editor will be present for this element." VisibleIf="ElementPerLine==true" />
+			<Boolean Name="NeedsLocalisation" ToolTip="Whether the text should be written to a seperate localisation file" Default="false" VisibleIf="ElementPerLine==false" />
+			<String Name="LocalisationFile" ToolTip="The name of the localisation file to store the localisation in" VisibleIf="NeedsLocalisation==true" />
+			<String Name="VisibleIf" ToolTip="The expression to use to determine whether this element is visible. Leave blank to have always visible." />
+			<Colour Name="TextColour" ToolTip="The colour on the element name in the ui." Default="Primitive" HasAlpha="false" />
+			<String Name="ToolTip" ToolTip="The tooltip to display when this element is moused over." />
+			<Boolean Name="HasAttributes" ToolTip="Enable to allow adding attributes" VisibleIf="Root.DataType==xml" />
+		</Attributes>
+		<Reference Name="Attributes" Keys="Attributes" ToolTip="The attributes of this element" Nullable="true" VisibleIf="HasAttributes==true" />
+	</StructDef>
+
+	<StructDef Name="Enum" ToolTip="A value chosen from a series of valid values." TextColour="Primitive">
+		<Attributes>
+			<String Name="Name" Default="Enum" ToolTip="The name to be written for this element. Place a path to an element inside a '{}' to use that elements value." />
+			<String Name="EnumValues" ToolTip="A comma seperated list of enum values that can be picked." VisibleIf="Key==null" />
+			<String Name="Key" ToolTip="The key of the EnumDef to load the EnumValues from." VisibleIf="EnumValues==null" />
+			<String Name="Default" ToolTip="The default value for this element. If not set it defaults to the first EnumValue." />
+			<Boolean Name="SkipIfDefault" ToolTip="Don't write out this element if it is at the default value." Default="true" />
+			<String Name="VisibleIf" ToolTip="The expression to use to determine whether this element is visible. Leave blank to have always visible." />
+			<Colour Name="TextColour" ToolTip="The colour on the element name in the ui." Default="Primitive" HasAlpha="false" />
+			<String Name="ToolTip" ToolTip="The tooltip to display when this element is moused over." />
+			<Boolean Name="HasAttributes" ToolTip="Enable to allow adding attributes" VisibleIf="Root.DataType==xml" />
+		</Attributes>
+		<Reference Name="Attributes" Keys="Attributes" ToolTip="The attributes of this element" Nullable="true" VisibleIf="HasAttributes==true" />
+	</StructDef>
+
+	<StructDef Name="Flags" ToolTip="A collection of values chosen from a series of valid values." TextColour="Primitive">
+		<Attributes>
+			<String Name="Name" Default="Flags" ToolTip="The name to be written for this element. Place a path to an element inside a '{}' to use that elements value." />
+			<String Name="FlagValues" ToolTip="A comma seperated list of flag values that can be picked." VisibleIf="Key==null" />
+			<String Name="Key" ToolTip="The key of the EnumDef to load the FlagValues from." VisibleIf="FlagValues==null" />
+			<String Name="Default" ToolTip="The default value for this element. If not set it defaults to empty." />
+			<Boolean Name="SkipIfDefault" ToolTip="Don't write out this element if it is at the default value." Default="true" />
+			<String Name="VisibleIf" ToolTip="The expression to use to determine whether this element is visible. Leave blank to have always visible." />
+			<Colour Name="TextColour" ToolTip="The colour on the element name in the ui." Default="Primitive" HasAlpha="false" />
+			<String Name="ToolTip" ToolTip="The tooltip to display when this element is moused over." />
+			<Boolean Name="HasAttributes" ToolTip="Enable to allow adding attributes" VisibleIf="Root.DataType==xml" />
+		</Attributes>
+		<Reference Name="Attributes" Keys="Attributes" ToolTip="The attributes of this element" Nullable="true" VisibleIf="HasAttributes==true" />
+	</StructDef>
+
+	<CollectionDef Name="EnumDef" ToolTip="The definition for a collection of enumvalues that can be referenced by enums." TextColour="Primitive" Collapse="True" MinCount="1">
+		<Attributes>
+			<String Name="Name" Default="EnumDef" ToolTip="The name to be written for this element. Place a path to an element inside a '{}' to use that elements value. This will be used as the key when referencing it." />
+			<String Name="Default" ToolTip="The default value for this element." />
+			<Boolean Name="SkipIfDefault" ToolTip="Don't write out this element if it is at the default value." Default="true" />
+			<String Name="VisibleIf" ToolTip="The expression to use to determine whether this element is visible. Leave blank to have always visible." />
+			<Colour Name="TextColour" ToolTip="The colour on the element name in the ui." Default="Primitive" HasAlpha="false" />
+			<String Name="ToolTip" ToolTip="The tooltip to display when this element is moused over." />
+			<Boolean Name="IsGlobal" ToolTip="Whether this definition can be referenced from other files." />
+		</Attributes>
+		<String Name="EnumValue" />
+	</CollectionDef>
+
+	<StructDef Name="Tree" ToolTip="A tree of string values." TextColour="Collection">
+		<Attributes>
+			<String Name="Name" Default="Tree" ToolTip="The name to be written for this element. Place a path to an element inside a '{}' to use that elements value." />
+			<Boolean Name="SkipIfDefault" ToolTip="Don't write out this element if it is at the default value." Default="true" />
+			<String Name="VisibleIf" ToolTip="The expression to use to determine whether this element is visible. Leave blank to have always visible." />
+			<Colour Name="TextColour" ToolTip="The colour on the element name in the ui." Default="Collection" HasAlpha="false" />
+			<String Name="ToolTip" ToolTip="The tooltip to display when this element is moused over." />
+			<Boolean Name="HasAttributes" ToolTip="Enable to allow adding attributes" VisibleIf="Root.DataType==xml" />
+		</Attributes>
+		<Reference Name="Attributes" Keys="Attributes" ToolTip="The attributes of this element" Nullable="true" VisibleIf="HasAttributes==true" />
+	</StructDef>
+
+	<CollectionDef Name="Collection" ToolTip="A collection containing multiple elements of the specified child." TextColour="Collection">
+		<Attributes>
+			<String Name="Name" Default="Collection" ToolTip="The name to be written for this element. Place a path to an element inside a '{}' to use that elements value." />
+			<Boolean Name="ChildrenAreUnique" ToolTip="If set then each child can only be added once" />
+			<Boolean Name="Collapse" ToolTip="If set to true the collection will be collapsed to a single line seperated by the Seperator string. Only works if the child is a primitive item." />
+			<String Name="Seperator" Default="," ToolTip="The string to be used when in collapse mode." VisibleIf="Collapse==true" />
+			<Number Name="MinCount" Min="0" ToolTip="The minimum number of child elements this can have." />
+			<Number Name="MaxCount" Min="1" Default="99999999" ToolTip="The maximum number of child elements this can have." />
+			<String Name="Keys" ToolTip="The names of the objects to use in this collection." />
+			<String Name="DefKey" ToolTip="The name of the ReferenceDef to use in this collection." />
+			<Boolean Name="SkipIfDefault" ToolTip="Don't write out this element if it is at the default value." Default="true" />
+			<String Name="VisibleIf" ToolTip="The expression to use to determine whether this element is visible. Leave blank to have always visible." />
+			<Colour Name="TextColour" ToolTip="The colour on the element name in the ui." Default="Collection" HasAlpha="false" />
+			<String Name="ToolTip" ToolTip="The tooltip to display when this element is moused over." />
+			<Boolean Name="HasAttributes" ToolTip="Enable to allow adding attributes" VisibleIf="Root.DataType==xml" />
+		</Attributes>
+		<Reference Name="Data" DefKey="Elements" ToolTip="The elements that can be placed in this collection" />
+		<AdditionalDefs>
+			<Reference Name="Attributes" Keys="Attributes" ToolTip="The attributes of this element" Nullable="true" VisibleIf="HasAttributes==true" />
+		</AdditionalDefs>
+	</CollectionDef>
+
+	<CollectionDef Name="CollectionDef" ToolTip="A definition for a collection that can be referenced." TextColour="Collection">
+		<Attributes>
+			<String Name="Name" Default="CollectionDef" ToolTip="The name to be written for this element. Place a path to an element inside a '{}' to use that elements value. This will be used as the key when referencing it." />
+			<Boolean Name="ChildrenAreUnique" ToolTip="If set then each child can only be added once" />
+			<Boolean Name="Collapse" ToolTip="If set to true the collection will be collapsed to a single line seperated by the Seperator string. Only works if the child is a primitive item." />
+			<String Name="Seperator" Default="," ToolTip="The string to be used when in collapse mode." VisibleIf="Collapse==true" />
+			<Number Name="MinCount" Min="0" ToolTip="The minimum number of child elements this can have." />
+			<Number Name="MaxCount" Min="1" Default="99999999" ToolTip="The maximum number of child elements this can have." />
+			<String Name="Keys" ToolTip="The names of the objects to use in this collection." />
+			<String Name="DefKey" ToolTip="The name of the ReferenceDef to use in this collection." />
+			<Boolean Name="SkipIfDefault" ToolTip="Don't write out this element if it is at the default value." Default="true" />
+			<String Name="VisibleIf" ToolTip="The expression to use to determine whether this element is visible. Leave blank to have always visible." />
+			<Colour Name="TextColour" ToolTip="The colour on the element name in the ui." Default="Collection" HasAlpha="false" />
+			<String Name="ToolTip" ToolTip="The tooltip to display when this element is moused over." />
+			<Boolean Name="IsGlobal" ToolTip="Whether this definition can be referenced from other files." />
+			<Boolean Name="HasAttributes" ToolTip="Enable to allow adding attributes" VisibleIf="Root.DataType==xml" />
+		</Attributes>
+		<Reference Name="Data" DefKey="Elements" ToolTip="The elements that can be placed in this collection" />
+		<AdditionalDefs>
+			<Reference Name="Attributes" Keys="Attributes" ToolTip="The attributes of this element" Nullable="true" VisibleIf="HasAttributes==true" />
+		</AdditionalDefs>
+	</CollectionDef>
+
+	<CollectionDef Name="Struct" ToolTip="A collection of elements to be placed within a single element." TextColour="Struct">
+		<Attributes>
+			<String Name="Name" Default="Struct" ToolTip="The name to be written for this element. Place a path to an element inside a '{}' to use that elements value." />
+			<String Name="Extends" ToolTip="The name of a struct or structdef this extends. Override elements in the parent by giving them the same name." />
+			<String Name="ExtendsAfter" ToolTip="The element name to insert the new elements after" VisibleIf="Extends!=null" />
+			<Boolean Name="Nullable" Default="true" ToolTip="Whether this element can be empty." />
+			<Boolean Name="Collapse" ToolTip="If set to true the struct will be collapsed to a single line seperated by the Seperator string. Only works all the child are a primitive items." />
+			<String Name="Seperator" Default="," ToolTip="The string to be used when in collapse mode." VisibleIf="Collapse==true" />
+			<Boolean Name="SkipIfDefault" ToolTip="Don't write out this element if it is at the default value." Default="true" />
+			<String Name="Description" ToolTip="The description to be used. Add a child names inside {} to use the contents of it in the description." />
+			<String Name="VisibleIf" ToolTip="The expression to use to determine whether this element is visible. Leave blank to have always visible." />
+			<Colour Name="TextColour" ToolTip="The colour on the element name in the ui." Default="Struct" HasAlpha="false" />
+			<String Name="ToolTip" ToolTip="The tooltip to display when this element is moused over." />
+			<Boolean Name="HasAttributes" ToolTip="Enable to allow adding attributes" VisibleIf="Root.DataType==xml" />
+		</Attributes>
+		<Reference Name="Data" DefKey="Elements" ToolTip="The defined children of the struct" />
+		<AdditionalDefs>
+			<Reference Name="Attributes" Keys="Attributes" ToolTip="The attributes of this element" Nullable="true" VisibleIf="HasAttributes==true" />
+		</AdditionalDefs>
+	</CollectionDef>
+
+	<CollectionDef Name="StructDef" ToolTip="A definition for a struct that can be referenced." TextColour="Struct">
+		<Attributes>
+			<String Name="Name" Default="StructDef" ToolTip="The name to be written for this element. Place a path to an element inside a '{}' to use that elements value. This will be used as the key when referencing it." />
+			<String Name="Extends" ToolTip="The name of a struct or structdef this extends. Override elements in the parent by giving them the same name." />
+			<String Name="ExtendsAfter" ToolTip="The element name to insert the new elements after" VisibleIf="Extends!=null" />
+			<Boolean Name="Nullable" Default="true" ToolTip="Whether this element can be empty." />
+			<Boolean Name="Collapse" ToolTip="If set to true the struct will be collapsed to a single line seperated by the Seperator string. Only works all the child are a primitive items." />
+			<String Name="Seperator" Default="," ToolTip="The string to be used when in collapse mode." VisibleIf="Collapse==true" />
+			<Boolean Name="SkipIfDefault" ToolTip="Don't write out this element if it is at the default value." Default="true" />
+			<String Name="Description" ToolTip="The description to be used. Add a child names inside {} to use the contents of it in the description." />
+			<String Name="VisibleIf" ToolTip="The expression to use to determine whether this element is visible. Leave blank to have always visible." />
+			<Colour Name="TextColour" ToolTip="The colour on the element name in the ui." Default="Struct" HasAlpha="false" />
+			<String Name="ToolTip" ToolTip="The tooltip to display when this element is moused over." />
+			<Boolean Name="IsGlobal" ToolTip="Whether this definition can be referenced from other files." />
+			<Boolean Name="HasAttributes" ToolTip="Enable to allow adding attributes" VisibleIf="Root.DataType==xml" />
+		</Attributes>
+		<Reference Name="Data" DefKey="Elements" ToolTip="The defined children of the struct" />
+		<AdditionalDefs>
+			<Reference Name="Attributes" Keys="Attributes" ToolTip="The attributes of this element" Nullable="true" VisibleIf="HasAttributes==true" />
+		</AdditionalDefs>
+	</CollectionDef>
+
+	<CollectionDef Name="GraphStruct" ToolTip="A node on a graph." TextColour="Struct">
+		<Attributes>
+			<String Name="Name" Default="GraphStruct" ToolTip="The name to be written for this element. Place a path to an element inside a '{}' to use that elements value." />
+			<String Name="Extends" ToolTip="The name of a struct or structdef this extends. Override elements in the parent by giving them the same name." />
+			<String Name="ExtendsAfter" ToolTip="The element name to insert the new elements after" VisibleIf="Extends!=null" />
+			<String Name="ChildAsGUID" ToolTip="The child to use as this elements GUID." />
+			<Boolean Name="AllowReferenceLinks" Default="true" ToolTip="Whether to allow links to be by reference." />
+			<Boolean Name="AllowCircularLinks" Default="false" ToolTip="Whether circular links are allowed." VisibleIf="AllowReferenceLinks==true" />
+			<Boolean Name="FlattenData" Default="false" ToolTip="If true each graph node will be placed in a flat list within this element." VisibleIf="AllowReferenceLinks==true" />
+			<String Name="NodeStoreName" Default="Nodes" ToolTip="The name of the node added to this to store all the graph nodes." VisibleIf="FlattenData==true" />
+			<Colour Name="Background" Default="0,0,0,0" />
+			<String Name="Description" ToolTip="The description to be used. Add a child names inside {} to use the contents of it in the description." />
+			<String Name="VisibleIf" ToolTip="The expression to use to determine whether this element is visible. Leave blank to have always visible." />
+			<Colour Name="TextColour" ToolTip="The colour on the element name in the ui." Default="Struct" HasAlpha="false" />
+			<String Name="ToolTip" ToolTip="The tooltip to display when this element is moused over." />
+			<Boolean Name="HasAttributes" ToolTip="Enable to allow adding attributes" VisibleIf="Root.DataType==xml" />
+		</Attributes>
+		<Reference Name="Data" DefKey="Elements" ToolTip="The defined children of the struct" />
+		<AdditionalDefs>
+			<Reference Name="Attributes" Keys="Attributes" ToolTip="The attributes of this element" Nullable="true" VisibleIf="HasAttributes==true"/>
+		</AdditionalDefs>
+	</CollectionDef>
+
+	<CollectionDef Name="GraphStructDef" ToolTip="A node on a graph that can be referenced." TextColour="Struct">
+		<Attributes>
+			<String Name="Name" Default="GraphStruct" ToolTip="The name to be written for this element. Place a path to an element inside a '{}' to use that elements value." />
+			<String Name="Extends" ToolTip="The name of a struct or structdef this extends. Override elements in the parent by giving them the same name." />
+			<String Name="ExtendsAfter" ToolTip="The element name to insert the new elements after" VisibleIf="Extends!=null" />
+			<String Name="Description" ToolTip="The description to be used. Add a child names inside {} to use the contents of it in the description." />
+			<String Name="ChildAsGUID" ToolTip="The child to use as this elements GUID." />
+			<Colour Name="Background" Default="0,0,0,0" />
+			<String Name="VisibleIf" ToolTip="The expression to use to determine whether this element is visible. Leave blank to have always visible." />
+			<Colour Name="TextColour" ToolTip="The colour on the element name in the ui." Default="Struct" HasAlpha="false" />
+			<String Name="ToolTip" ToolTip="The tooltip to display when this element is moused over." />
+			<Boolean Name="IsGlobal" ToolTip="Whether this definition can be referenced from other files." />
+			<Boolean Name="HasAttributes" ToolTip="Enable to allow adding attributes" VisibleIf="Root.DataType==xml" />
+		</Attributes>
+		<Reference Name="Data" DefKey="Elements" ToolTip="The defined children of the struct" />
+		<AdditionalDefs>
+			<Reference Name="Attributes" Keys="Attributes" ToolTip="The attributes of this element" Nullable="true" VisibleIf="HasAttributes==true" />
+		</AdditionalDefs>
+	</CollectionDef>
+
+	<CollectionDef Name="GraphCollection" ToolTip="A node on a graph that can be referenced." TextColour="Collection">
+		<Attributes>
+			<String Name="Name" Default="GraphCollection" ToolTip="The name to be written for this element. Place a path to an element inside a '{}' to use that elements value." />
+			<Boolean Name="ChildrenAreUnique" ToolTip="If set then each child can only be added once" />
+			<Boolean Name="AllowReferenceLinks" Default="true" ToolTip="Whether to allow links to be by reference." />
+			<Boolean Name="AllowCircularLinks" Default="false" ToolTip="Whether circular links are allowed." VisibleIf="AllowReferenceLinks==true" />
+			<Boolean Name="FlattenData" Default="false" ToolTip="If true each graph node will be placed in a flat list within this element." VisibleIf="AllowReferenceLinks==true" />
+			<String Name="NodeStoreName" Default="Nodes" ToolTip="The name of the node added to this to store all the graph nodes." VisibleIf="FlattenData==true" />
+			<String Name="Keys" ToolTip="The names of the objects to use in this collection." />
+			<String Name="DefKey" ToolTip="The name of the ReferenceDef to use in this collection." />
+			<Number Name="MinCount" Min="0" ToolTip="The minimum number of child elements this can have." />
+			<Number Name="MaxCount" Min="1" Default="99999999" ToolTip="The maximum number of child elements this can have." />
+			<Colour Name="Background" Default="0,0,0,0" />
+			<Boolean Name="SkipIfDefault" ToolTip="Don't write out this element if it is at the default value." Default="true" />
+			<String Name="VisibleIf" ToolTip="The expression to use to determine whether this element is visible. Leave blank to have always visible." />
+			<Colour Name="TextColour" ToolTip="The colour on the element name in the ui." Default="Collection" HasAlpha="false" />
+			<String Name="ToolTip" ToolTip="The tooltip to display when this element is moused over." />
+			<Boolean Name="HasAttributes" ToolTip="Enable to allow adding attributes" VisibleIf="Root.DataType==xml" />
+		</Attributes>
+		<Reference Name="Data" DefKey="Elements" ToolTip="The elements that can be placed in this collection" />
+		<AdditionalDefs>
+			<Reference Name="Attributes" Keys="Attributes" ToolTip="The attributes of this element" Nullable="true" VisibleIf="HasAttributes==true" />
+		</AdditionalDefs>
+	</CollectionDef>
+
+	<CollectionDef Name="GraphCollectionDef" ToolTip="A node on a graph that can be referenced." TextColour="Collection">
+		<Attributes>
+			<String Name="Name" Default="GraphCollection" ToolTip="The name to be written for this element. Place a path to an element inside a '{}' to use that elements value. This will be used as the key when referencing it." />
+			<Boolean Name="ChildrenAreUnique" ToolTip="If set then each child can only be added once" />
+			<String Name="Keys" ToolTip="The names of the objects to use in this collection." />
+			<String Name="DefKey" ToolTip="The name of the ReferenceDef to use in this collection." />
+			<Number Name="MinCount" Min="0" ToolTip="The minimum number of child elements this can have." />
+			<Number Name="MaxCount" Min="1" Default="99999999" ToolTip="The maximum number of child elements this can have." />
+			<Colour Name="Background" Default="0,0,0,0" />
+			<Boolean Name="SkipIfDefault" ToolTip="Don't write out this element if it is at the default value." Default="true" />
+			<String Name="VisibleIf" ToolTip="The expression to use to determine whether this element is visible. Leave blank to have always visible." />
+			<Colour Name="TextColour" ToolTip="The colour on the element name in the ui." Default="Collection" HasAlpha="false" />
+			<String Name="ToolTip" ToolTip="The tooltip to display when this element is moused over." />
+			<Boolean Name="IsGlobal" ToolTip="Whether this definition can be referenced from other files." />
+			<Boolean Name="HasAttributes" ToolTip="Enable to allow adding attributes" VisibleIf="Root.DataType==xml" />
+		</Attributes>
+		<Reference Name="Data" DefKey="Elements" ToolTip="The elements that can be placed in this collection" />
+		<AdditionalDefs>
+			<Reference Name="Attributes" Keys="Attributes" ToolTip="The attributes of this element" Nullable="true" VisibleIf="HasAttributes==true" />
+		</AdditionalDefs>
+	</CollectionDef>
+
+	<StructDef Name="GraphReference" ToolTip="An element that links to another graphnode.">
+		<Attributes>
+			<String Name="Name" Default="Reference" ToolTip="The name to be written for this element. Place a path to an element inside a '{}' to use that elements value." />
+			<String Name="Keys" ToolTip="The names of the graph nodes that this reference can contain." VisibleIf="DefKey==null" />
+			<String Name="DefKey" ToolTip="The name of the reference definition to use the keys from." VisibleIf="Keys==null" />
+			<Boolean Name="UseParentDescription" ToolTip="Whether to use the parent description when displayed in the graph" />
+			<Boolean Name="SkipIfDefault" ToolTip="Don't write out this element if it is at the default value." Default="true" />
+			<String Name="VisibleIf" ToolTip="The expression to use to determine whether this element is visible. Leave blank to have always visible." />
+			<String Name="ToolTip" ToolTip="The tooltip to display when this element is moused over." />
+			<Boolean Name="HasAttributes" ToolTip="Enable to allow adding attributes" VisibleIf="Root.DataType==xml" />
+		</Attributes>
+		<Reference Name="Attributes" Keys="Attributes" ToolTip="The attributes of this element" Nullable="true" VisibleIf="HasAttributes==true" />
+	</StructDef>
+
+	<CollectionDef Name="Timeline" ToolTip="A collection of keyframes." TextColour="Struct">
+		<Attributes>
+			<String Name="Name" Default="Timeline" ToolTip="The name to be written for this element. Place a path to an element inside a '{}' to use that elements value." />
+			<Boolean Name="Interpolate" Default="true" ToolTip="Whether the timeline should show interpolated values" />
+			<String Name="Keys" ToolTip="The names of the objects to use in this collection." />
+			<String Name="DefKey" ToolTip="The name of the ReferenceDef to use in this collection." />
+			<Number Name="MinCount" Min="0" ToolTip="The minimum number of keyframes this can have." />
+			<Number Name="MaxCount" Min="1" Default="99999999" ToolTip="The maximum number of keyframes this can have." />
+			<Boolean Name="SkipIfDefault" ToolTip="Don't write out this element if it is at the default value." Default="true" />
+			<String Name="VisibleIf" ToolTip="The expression to use to determine whether this element is visible. Leave blank to have always visible." />
+			<Colour Name="TextColour" ToolTip="The colour on the element name in the ui." Default="Struct" HasAlpha="false" />
+			<String Name="ToolTip" ToolTip="The tooltip to display when this element is moused over." />
+		</Attributes>
+		<Reference Name="Keyframe" Keys="Keyframe" Nullable="false" ToolTip="The keyframe. Must contain a number child with the name of the value in TimeChild." />
+	</CollectionDef>
+
+	<CollectionDef Name="Keyframe" ToolTip="A definition for a keyframe in a timeline." TextColour="Struct">
+		<Attributes>
+			<String Name="Name" Default="Keyframe" ToolTip="The name to be written for this element. Place a path to an element inside a '{}' to use that elements value. This will be used as the key when referencing it." />
+			<String Name="Extends" ToolTip="The name of a struct or structdef this extends. Override elements in the parent by giving them the same name." />
+			<String Name="ExtendsAfter" ToolTip="The element name to insert the new elements after" VisibleIf="Extends!=null" />
+			<Colour Name="Background" Default="0,0,0,0" />
+			<Boolean Name="Nullable" Default="true" ToolTip="Whether this element can be empty." />
+			<Boolean Name="Collapse" ToolTip="If set to true the struct will be collapsed to a single line seperated by the Seperator string. Only works all the child are a primitive items." />
+			<String Name="Seperator" Default="," ToolTip="The string to be used when in collapse mode." VisibleIf="Collapse==true" />
+			<Boolean Name="SkipIfDefault" ToolTip="Don't write out this element if it is at the default value." Default="true" />
+			<String Name="Description" ToolTip="The description to be used. Add a child names inside {} to use the contents of it in the description." />
+			<String Name="VisibleIf" ToolTip="The expression to use to determine whether this element is visible. Leave blank to have always visible." />
+			<Colour Name="TextColour" ToolTip="The colour on the element name in the ui." Default="Struct" HasAlpha="false" />
+			<String Name="ToolTip" ToolTip="The tooltip to display when this element is moused over." />
+			<Boolean Name="HasAttributes" ToolTip="Enable to allow adding attributes" VisibleIf="Root.DataType==xml" />
+			<Boolean Name="HasDuration" ToolTip="Whether this keyframe has a duration." />
+		</Attributes>
+		<Reference Name="Data" DefKey="Elements" ToolTip="The defined children of the struct" />
+		<AdditionalDefs>
+			<Reference Name="Attributes" Keys="Attributes" ToolTip="The attributes of this element" Nullable="true" VisibleIf="HasAttributes==true" />
+			<Reference Keys="Number" Name="Time" SkipIfDefault="false" Nullable="false" ToolTip="The element to hold the time." />
+			<Reference Keys="Number" Name="Duration" SkipIfDefault="false" Nullable="false" ToolTip="The element to hold the duration of this keyframe." VisibleIf="HasDuration==true" />
+		</AdditionalDefs>
+	</CollectionDef>
+
+	<StructDef Name="ReferenceDef" ToolTip="An element used to allow the user to pick from a collection of valid elements.">
+		<Attributes>
+			<String Name="Name" Default="Reference" ToolTip="The name to be written for this element. Place a path to an element inside a '{}' to use that elements value." />
+			<String Name="Keys" ToolTip="The names of the definitions that this reference can contain." />
+			<Boolean Name="IsGlobal" ToolTip="Whether this definition can be referenced from other files." />
+		</Attributes>
+	</StructDef>
+
+	<StructDef Name="Reference" ToolTip="An element used to allow the user to pick from a collection of valid elements.">
+		<Attributes>
+			<String Name="Name" Default="Reference" ToolTip="The name to be written for this element. Place a path to an element inside a '{}' to use that elements value." />
+			<String Name="Keys" ToolTip="The names of the definitions that this reference can contain." VisibleIf="DefKey==null" />
+			<String Name="DefKey" ToolTip="The name of the reference definition to use the keys from." VisibleIf="Keys==null" />
+			<Boolean Name="Nullable" Default="true" ToolTip="Whether this element can be empty." />
+			<Boolean Name="SkipIfDefault" ToolTip="Don't write out this element if it is at the default value." Default="true" />
+			<String Name="VisibleIf" ToolTip="The expression to use to determine whether this element is visible. Leave blank to have always visible." />
+			<String Name="ToolTip" ToolTip="The tooltip to display when this element is moused over." />
+		</Attributes>
+	</StructDef>
+
+	<StructDef Name="Comment" ToolTip="An comment element.">
+		<Attributes>
+			<String Name="Text" ToolTip="The text in this comment." />
+		</Attributes>
+	</StructDef>
+
+	<StructDef Name="GraphComment" Nullable="false">
+		<String Name="Title" />
+		<Colour Name="Colour" />
+	</StructDef>
+	
+	<Collection Name="Definitions" ToolTip="The definitions stored in this file. Can contain only a single non-def element.">
+		<Attributes>
+			<String Name="Extension" ToolTip="The extension to use for these definitions. Leave blank to revert to the data type (.xml, .json etc)." />
+			<Colour Name="Colour" ToolTip="The colour to show this file in the project view and the tab title. Can help to differentiate different files" HasAlpha="false" />
+			<File Name="Icon" ToolTip="An image to use as an icon for this file type" />
+			<Enum Name="DataType" EnumValues="xml,json,yaml" ToolTip="The data type of the data." />
+		</Attributes>
+		<Reference Name="Definition" Keys="Items(Struct,Collection,GraphStruct,GraphCollection,SkeletalAnimation),Definitions(StructDef,EnumDef,CollectionDef,GraphStructDef,GraphCollectionDef,ReferenceDef)" ToolTip="A single definition." />
+	</Collection>
+	
+</Definitions>
